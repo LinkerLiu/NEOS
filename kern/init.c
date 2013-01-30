@@ -19,6 +19,21 @@ test_backtrace(int x)
 	cprintf("leaving test_backtrace %d\n", x);
 }
 
+void lab1_Exercise8()
+{
+	// 0x00646c72 will print "rld" : Because PC is little ending
+	// 57676 = 0xe110 -> look like ello(For print He110)
+	unsigned int i = 0x00646c72;
+	cprintf("H%x Wo%s\n", 57616, &i);
+
+	/*
+	 *  Actually va_start, va_args is using statck to store paramters!
+	 *  So 3 is push at first. when we want to get next atom from stack
+	 *  for"y=%d" -> we will get random number inside statck next to '3'
+	 */
+	cprintf("x=%d y=%d\n", 3);
+}
+
 void
 i386_init(void)
 {
@@ -33,7 +48,7 @@ i386_init(void)
 	// Can't call cprintf until after we do this!
 	cons_init();
 
-	cprintf("6828 decimal is %o octal!\n", 6828);
+	lab1_Exercise8();
 
 	// Test the stack backtrace function (lab 1 only)
 	test_backtrace(5);
